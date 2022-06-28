@@ -9,8 +9,8 @@ COM = gcc
 SRC = src/
 HED = $(SRC)headers/
 
-main: main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o $(HED)mainlib.h $(HED)map.h
-	$(COM) -o baconbit.exe main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o
+main: main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o $(HED)mainlib.h $(HED)map.h
+	$(COM) -o baconbit.exe main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o
 	make clean
 
 main.o: $(SRC)main.c $(HED)mainlib.h
@@ -30,6 +30,9 @@ compiler.o: $(SRC)compiler.c $(HED)mainlib.h $(HED)map.h
 
 interpreter.o: $(SRC)interpreter.c $(HED)mainlib.h
 	$(COM) -c $(SRC)interpreter.c
+
+util.o: $(SRC)util.c $(HED)mainlib.h
+	$(COM) -c $(SRC)util.c
 
 clean:
 	$(COMMAND) *.o

@@ -3,20 +3,20 @@
 #include <string.h>
 #include "headers/mainlib.h"
 
-char** tokenizer(Linted buffer) {
+char** tokenizer(ByteStream buffer) {
     unsigned long long int words = 0;
     char** result = NULL;
-    char* token = strtok(buffer.str, "\n");
+    char* token = strtok(buffer.bytes, "\n");
 
     while (token) {
         result = realloc(result, sizeof(char*) * ++words);
         if (result == NULL) {
-            fputs("TOKENIZER ERROR: memory allocation", stderr);
+            fputs("TOKENIZER ERROR: memory allocation failure", stderr);
             exit(EXIT_FAILURE);
         }
 
         if ((result[words-1] = malloc(strlen(token)+1)) == NULL) {
-            fputs("TOKENIZER ERROR: memory allocation", stderr);
+            fputs("TOKENIZER ERROR: memory allocation failure", stderr);
             exit(EXIT_FAILURE);
         }
         
@@ -26,13 +26,13 @@ char** tokenizer(Linted buffer) {
 
     result = realloc(result, sizeof(char*) * (words + 1));
     if (result == NULL) {
-        fputs("TOKENIZER ERROR: memory allocation", stderr);
+        fputs("TOKENIZER ERROR: memory allocation failure", stderr);
         exit(EXIT_FAILURE);
     }
 
     result[words] = NULL;
 
-    free(buffer.str);
+    free(buffer.bytes);
 
     return result;
 }

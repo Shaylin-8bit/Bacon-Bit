@@ -3,23 +3,12 @@
 #include <string.h>
 #include "headers/mainlib.h"
 
-void append2(char* str, char byte) {
-    size_t len = strlen(str) + 1;
-    str = realloc(str, len);
-    if (str == NULL) {
-        fputs("FILE_HANDLER ERROR: memory allocation", stderr);
-        exit(EXIT_FAILURE);
-    }
-    str[len - 1] = byte;
-    str[len] = '\0';
-}
-
-char* file_handler(char* fn) {
+ByteStream file_handler(char* fn) {
     FILE* fp = fopen(fn, "r");
     if (fp == NULL) {
         char* full = malloc(strlen(fn) + strlen(".bb") + 1);
         if (full == NULL) {
-            fputs("FILE_HANDLER ERROR: memory allocation", stderr);
+            fputs("FILE_HANDLER ERROR: memory allocation failure", stderr);
             exit(EXIT_FAILURE);
         }
         strcpy(full, fn);
@@ -32,18 +21,13 @@ char* file_handler(char* fn) {
         }
     }
 
-    char* out = malloc(1);
-    if (out == NULL) {
-        fputs("FILE ERROR: memory allocation", stderr);
-        exit(EXIT_FAILURE);
-    }
-    out[0] = '\0';
+    ByteStream buffer = stream("FILE_HANDLER");
     
     char c;
     while ((c = getc(fp)) != EOF) {
-        append2(out, c);
+        push(&buffer, c);
     } 
 
     fclose(fp);
-    return out;
+    return buffer;
 }

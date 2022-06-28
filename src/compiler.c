@@ -4,7 +4,6 @@
 #include "headers/map.h"
 #include "headers/mainlib.h"
 
-
 unsigned long long raise(unsigned long long base, unsigned long long exp) {
     if (exp == 0) return 1;
     unsigned long long result = base;
@@ -53,33 +52,9 @@ unsigned char get_flag_byte(char* str) {
     return 0;
 }
 
+ByteStream compiler(char** lint) {
 
-void append(Compiled* bytes, unsigned char byte) {
-    bytes->sze++;
-    bytes->bytes = realloc(bytes->bytes, bytes->sze+1);
-    if (bytes->bytes == NULL) {
-        fputs("COMPILER ERROR: memory allocation", stderr);
-        exit(EXIT_FAILURE);
-    }
-    
-    bytes->bytes[bytes->sze - 1] = byte;
-    bytes->bytes[bytes->sze] = '\0';
-}
-
-
-Compiled compiler(char** lint) {
-
-    Compiled result = {
-        malloc(1), 
-        0
-    };
-
-    if (result.bytes == NULL) {
-        fputs("COMPILER ERROR: memory allocation", stderr);
-        exit(EXIT_FAILURE);
-    }
-
-    result.bytes[0] = '\0';
+    ByteStream result = stream("COMPILER");
     long long loops = 0;
     
     for (size_t i = 0; lint[i]; i++) {
@@ -88,7 +63,7 @@ Compiled compiler(char** lint) {
 
         if (byte >= 65 && byte <= 129) {
             if (byte == get_command_byte("whil")) ++loops;
-            append(&result, byte);
+            push(&result, byte);
             char* next = lint[++i];
 
             if (next == NULL) {
@@ -98,22 +73,22 @@ Compiled compiler(char** lint) {
 
             if (next[0] >= '0' && next[0] <= '9') {
                 unsigned char nbyte = toint(next);
-                append(&result, get_flag_byte("__literal"));
-                append(&result, nbyte);
-                append(&result, get_flag_byte("__literal"));
+                push(&result, get_flag_byte("__literal"));
+                push(&result, nbyte);
+                push(&result, get_flag_byte("__literal"));
             } else {
                 unsigned char nbyte = get_global_byte(next);
                 if (!nbyte) {
                     fprintf(stderr, "COMPILER ERROR: Invalid Token at %llu: \"%s\" must be byte value", i+1, next);
                     exit(EXIT_FAILURE);
                 }
-                append(&result, get_flag_byte("__global"));
-                append(&result, nbyte);
-                append(&result, get_flag_byte("__global"));
+                push(&result, get_flag_byte("__global"));
+                push(&result, nbyte);
+                push(&result, get_flag_byte("__global"));
             }
 
         } else if (byte) {
-            append(&result, byte);
+            push(&result, byte);
             if (byte == get_command_byte("endl")) --loops;
             if (loops < 0) {
                 fprintf(stderr, "COMPILER ERROR: endl outside whil (%llu)", i+1);

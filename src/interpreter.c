@@ -19,7 +19,7 @@ unsigned char get_val(unsigned char type, unsigned char value, unsigned char* fi
 }
 
 
-Instance new_instance(Compiled bytes) {
+Instance new_instance(ByteStream bytes) {
     Instance r;
     r.location = 0;
     r.line = 0;
@@ -168,7 +168,7 @@ void run_next(Instance* instance) {
 }
 
 
-void interpreter(Compiled program) {
+void interpreter(ByteStream program) {
     Instance main_instance = new_instance(program);
     while (main_instance.line < main_instance.program.sze) {
         run_next(&main_instance);
