@@ -31,7 +31,7 @@ unsigned char toint(char* str) {
 unsigned char tochar(char* str) {
     size_t len = strlen(str);
     if ((len < 3 || len > 4) || (len > 3 && str[1] != '\\')) {
-        fputs("COMPILER ERROR: literal value not a valid character", stderr);
+        fputs("COMPILER ERROR: literal value not a valid char", stderr);
         exit(EXIT_FAILURE);
     } 
     if (len == 3) return str[1];
