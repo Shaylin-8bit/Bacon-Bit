@@ -17,24 +17,7 @@ void push(Linted* str, char byte) {
 }
 
 
-Linted linter(char* fn) {
-    FILE* fp = fopen(fn, "r");
-    if (fp == NULL) {
-        char* full = malloc(strlen(fn) + strlen(".bb") + 1);
-        if (full == NULL) {
-            fputs("LINTER ERROR: memory allocation", stderr);
-            exit(EXIT_FAILURE);
-        }
-        strcpy(full, fn);
-        strcat(full, ".bb");
-
-        fp = fopen(full, "r");
-        if (fp == NULL) {
-            fputs("LINTER ERROR: invalid file name", stderr);
-            exit(EXIT_FAILURE);
-        }
-    }
-    
+Linted linter(char* file) {
     Linted buffer = {
         malloc(1), 
         0
@@ -51,7 +34,7 @@ Linted linter(char* fn) {
     char c;
     char white = 0;
 
-    for (size_t j = 0; (c = getc(fp)) != EOF; j++) {
+    for (size_t j = 0; (c = file[j]) != '\0'; j++) {
         if (isspace(c)) {
             if (!white) {
                 white = 1;
@@ -59,7 +42,7 @@ Linted linter(char* fn) {
             }
         } else if (c == ';') {
             while (c != '\n' && c != EOF) {
-                c = getc(fp);
+                c = file[++j];
             }
             if (!white) {
                 white = 1;
@@ -72,6 +55,5 @@ Linted linter(char* fn) {
     }
 
     push(&buffer, '\0');
-    fclose(fp);
     return buffer;
 }

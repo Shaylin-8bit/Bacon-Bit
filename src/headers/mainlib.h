@@ -16,6 +16,7 @@ typedef struct {
     size_t line;
 } Instance;
 
+char* file_handler(char* fn);
 Linted linter(char* fp);
 char** tokenizer(Linted buffer);
 Compiled compiler(char** lint);

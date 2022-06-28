@@ -9,10 +9,10 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    Linted linted = linter(argv[1]);
+    char* file = file_handler(argv[1]);
+    Linted linted = linter(file);
     char** tokens = tokenizer(linted);
     Compiled compiled = compiler(tokens);
-
     interpreter(compiled);
 
     return 0;
