@@ -52,18 +52,26 @@ disn: write next byte to console as number
 divi: divide current location by next byte
 forw: move number of spaces forward as next byte indicates
 incr: increment current location by next byte
+modu: divide current location by next byte and save remainder (if next byte 0, 1 used instead)
 move: move to the index of the next byte specified
-mult: multiply current location by next byte
+mult: multiply current location by next byte (if next byte 0, 1 used instead)
 push: write next byte to current location
 whil: while next byte is true run all comands after next byte through next endl
 ```
 
 <h3> Byte Values </h3>
 
-`Literals` are numerical byte values containing the numbers 0 - 9. 
+`Literals` are numerical byte values containing the numbers 0 - 9, or characters wrapped in `'`. 
 <br>Because of the languages nature they are limited to the range 0 - 255.
 <br>In the event they exceed their limit, the compiler will attempt to wrap them using modulus.
 <br>A value exceeding the 64 bit unsigned integer limit may result in undefined behaviour.
+
+<br>The character set includes all single characters along with 3 escape senquences.
+```
+/n: newline
+/t: tab
+/b: backspace
+```
 
 `Globals` are variable literals provided by the system. 
 <br>They function in the same way as `Literals` but represent some value of the systems current state.

@@ -28,6 +28,29 @@ unsigned char toint(char* str) {
     return result;
 }
 
+unsigned char tochar(char* str) {
+    size_t len = strlen(str);
+    if ((len < 3 || len > 4) || (len > 3 && str[1] != '\\')) {
+        fputs("COMPILER ERROR: literal value not a valid character", stderr);
+        exit(EXIT_FAILURE);
+    } 
+    if (len == 3) return str[1];
+    switch(str[2]) {
+        case 'n':
+        return '\n';
+
+        case 't':
+        return '\t';
+
+        case 'b':
+        return '\b';
+
+        default:
+        fputs("COMPILER ERROR: literal value not a valid character", stderr);
+        exit(EXIT_FAILURE);
+    }
+}
+
 unsigned char get_command_byte(char* str) {
     for (size_t i = 0; COMMANDS[i].word != NULL; i++) {
         if (!strcmp(str, COMMANDS[i].word)) return COMMANDS[i].byte;
@@ -75,6 +98,12 @@ ByteStream compiler(char** lint) {
                 push(&result, get_flag_byte("__literal"));
                 push(&result, nbyte);
                 push(&result, get_flag_byte("__literal"));
+            
+            } else if (strlen(next) >= 3 && next[0] == '\'' && next[strlen(next)-1] == '\'') {
+                push(&result, get_flag_byte("__literal"));
+                push(&result, tochar(next));
+                push(&result, get_flag_byte("__literal"));
+
             } else {
                 unsigned char nbyte = get_global_byte(next);
                 if (!nbyte) {
