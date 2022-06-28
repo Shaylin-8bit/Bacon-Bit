@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     ByteStream linted = linter(file);
     char** tokens = tokenizer(linted);
     ByteStream compiled = compiler(tokens);
-    interpreter(compiled);
+    interpreter(compiled, 0);
 
     return 0;
 }

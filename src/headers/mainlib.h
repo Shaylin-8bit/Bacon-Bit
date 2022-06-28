@@ -15,7 +15,7 @@ ByteStream file_handler(char* fn);
 ByteStream linter(ByteStream fp);
 char** tokenizer(ByteStream buffer);
 ByteStream compiler(char** lint);
-void interpreter(ByteStream program);
+void interpreter(ByteStream program, char debug);
 
 ByteStream stream(char* module);
 void push(ByteStream* str, char byte);

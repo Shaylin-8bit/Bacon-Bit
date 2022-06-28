@@ -28,7 +28,6 @@ unsigned char toint(char* str) {
     return result;
 }
 
-
 unsigned char get_command_byte(char* str) {
     for (size_t i = 0; COMMANDS[i].word != NULL; i++) {
         if (!strcmp(str, COMMANDS[i].word)) return COMMANDS[i].byte;
@@ -104,13 +103,6 @@ ByteStream compiler(char** lint) {
         fputs("COMPILER ERROR: EOF loop(s) left open", stderr);
         exit(EXIT_FAILURE);
     }
-
-    /*
-    puts("RESULT:\n");
-    for (size_t i = 0; i < result.sze; i++) {
-        printf("%d\n", result.bytes[i]);
-    }
-    */
 
    return result;
 }
