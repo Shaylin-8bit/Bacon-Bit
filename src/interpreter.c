@@ -18,7 +18,6 @@ unsigned char get_val(unsigned char type, unsigned char value, unsigned char* fi
     }
 }
 
-
 Instance new_instance(ByteStream bytes) {
     Instance r;
     r.location = 0;
@@ -31,11 +30,9 @@ Instance new_instance(ByteStream bytes) {
     return r;
 }
 
-
-void run_next(Instance* instance, char debug) {
+void run_next(Instance* instance) {
 
     unsigned char c = instance->program.bytes[instance->line];
-    if (debug) printf("BYTE:: %d\tLINE:: %llu\tCUR:: %d\tIND:: %d\n", c, instance->line+1, instance->field[instance->location], instance->location);
 
     if (c >= 65 && c <= 129) {
         unsigned char nb1 = instance->program.bytes[instance->line+1];
@@ -46,8 +43,6 @@ void run_next(Instance* instance, char debug) {
             instance->field,
             instance->location
         );
-
-        
 
         switch (c) {
             case 65:  // move to location
@@ -112,9 +107,13 @@ void run_next(Instance* instance, char debug) {
             break;
 
             case 73: // decrement current byte
-            instance->field[instance->location] -= 1;
+            instance->field[instance->location] -= byte;
             instance->line += 4;
             break;
+
+            case 74:
+            instance->field[instance->location] *= byte;
+            instance->line += 4;
         }
     } else if (c >= 130 && c <= 162) {
         switch (c) {
@@ -161,10 +160,10 @@ void run_next(Instance* instance, char debug) {
     }
 }
 
-
 void interpreter(ByteStream program, char debug) {
-    Instance main_instance = new_instance(program);
-    while (main_instance.line < main_instance.program.sze) {
-        run_next(&main_instance, debug);
+    Instance instance = new_instance(program);
+    while (instance.line < instance.program.sze) {
+        if (debug) printf("BYTE:: %d\tLINE:: %llu\tCUR:: %d\tIND:: %d\n", instance.program.bytes[instance.line], instance.line+1, instance.field[instance.location], instance.location);
+        run_next(&instance);
     }
 }

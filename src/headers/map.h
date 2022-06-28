@@ -13,7 +13,7 @@ const Token GLOBALS[4] = {
   (Token) {NULL, 0},
 };
 
-const Token COMMANDS[12] = {
+const Token COMMANDS[13] = {
 // Commands (using next byte) 65 - 129
   (Token) {"move", 65},
   (Token) {"forw", 66},
@@ -24,6 +24,7 @@ const Token COMMANDS[12] = {
   (Token) {"whil", 71},
   (Token) {"incr", 72},
   (Token) {"decr", 73},
+  (Token) {"mult", 74},
   
 // Commands (not using next byte) 130 - 162
   (Token) {"endl", 130},
