@@ -25,6 +25,14 @@ ByteStream linter(ByteStream file) {
                 white = 1;
                 push(&buffer, '\n');
             }
+        } else if (c == '"') {
+            do {
+                c = file.bytes[++i];
+            } while (c != '"' && c != EOF);
+            if (!white) {
+                white = 1;
+                push(&buffer, '\n');
+            }
         } else if (c == '\'') {
             do {
                 push(&buffer, c);

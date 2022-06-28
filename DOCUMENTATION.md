@@ -83,12 +83,21 @@ inp: next byte in stdin file
 
 <h3> Other </h3>
 
-`Comments` are designated by semicolons `;` and extend to the end of the line.
+`Single Line Comments` are designated by semicolons `;` and extend to the end of the line.
 ```
 [COMMAND] [BYTE] ; this is a comment about a command requiring a byte
 [COMMAND]        ; this is a comment about a command not requiring a byte
 
 [COMMAND]; comments don't need white space
+```
+
+`Multi Line Comments` are designated with parenthesis `"` and continue to the next parenthesis.
+```
+" 
+Multi
+Line
+Comment
+"
 ```
 
 <h2> Run Time </h2>
