@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 ByteStream linter(ByteStream file) {
     ByteStream buffer = stream("LINTER");

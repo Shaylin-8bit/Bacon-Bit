@@ -7,7 +7,7 @@ endif
 
 COM = gcc
 SRC = src/
-HED = $(SRC)headers/
+HED = $(SRC)include/
 
 main: main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o $(HED)mainlib.h $(HED)map.h
 	$(COM) -o baconbit.exe main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o

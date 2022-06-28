@@ -49,9 +49,11 @@ back: move number of spaces backwords as next byte indicates
 decr: decrement current location by next byte
 disc: write next byte to console as character
 disn: write next byte to console as number
+divi: divide current location by next byte
 forw: move number of spaces forward as next byte indicates
 incr: increment current location by next byte
 move: move to the index of the next byte specified
+mult: multiply current location by next byte
 push: write next byte to current location
 whil: while next byte is true run all comands after next byte through next endl
 ```

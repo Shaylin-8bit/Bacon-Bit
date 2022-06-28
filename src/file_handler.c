@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 ByteStream file_handler(char* fn) {
     FILE* fp = fopen(fn, "r");

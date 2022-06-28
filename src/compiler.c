@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "headers/map.h"
-#include "headers/mainlib.h"
+#include "include/map.h"
+#include "include/mainlib.h"
 
 unsigned long long raise(unsigned long long base, unsigned long long exp) {
     if (exp == 0) return 1;

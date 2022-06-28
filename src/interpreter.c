@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 unsigned char get_val(unsigned char type, unsigned char value, unsigned char* field, unsigned char location) {
     if (type == 163) return value;
@@ -118,6 +118,11 @@ void run_next(Instance* instance) {
 
             case 75:
             instance->field[instance->location] /= (byte ? byte : 1);
+            instance->line += 4; 
+            break;
+
+            case 76:
+            instance->field[instance->location] %= (byte ? byte : 1);
             instance->line += 4; 
             break;
         }

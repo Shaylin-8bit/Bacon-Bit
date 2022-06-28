@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 int main(int argc, char* argv[]) {
 

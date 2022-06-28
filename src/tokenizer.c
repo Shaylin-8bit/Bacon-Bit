@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 char** tokenizer(ByteStream buffer) {
     unsigned long long int words = 0;

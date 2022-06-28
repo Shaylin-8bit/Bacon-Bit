@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/mainlib.h"
+#include "include/mainlib.h"
 
 void push(ByteStream* stream, char byte) {
     stream->sze++;
