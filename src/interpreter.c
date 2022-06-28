@@ -114,6 +114,12 @@ void run_next(Instance* instance) {
             case 74:
             instance->field[instance->location] *= byte;
             instance->line += 4;
+            break;
+
+            case 75:
+            instance->field[instance->location] /= (byte ? byte : 1);
+            instance->line += 4; 
+            break;
         }
     } else if (c >= 130 && c <= 162) {
         switch (c) {
