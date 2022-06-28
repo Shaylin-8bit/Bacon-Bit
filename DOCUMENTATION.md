@@ -50,7 +50,7 @@ decr: decrement current location by next byte
 disc: write next byte to console as character
 disn: write next byte to console as number
 forw: move number of spaces forward as next byte indicates
-incr: increment curreny location by next byte
+incr: increment current location by next byte
 move: move to the index of the next byte specified
 push: write next byte to current location
 whil: while next byte is true run all comands after next byte through next endl
