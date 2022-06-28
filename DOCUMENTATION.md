@@ -61,7 +61,7 @@ whil: while next byte is true run all comands after next byte through next endl
 
 <h3> Byte Values </h3>
 
-`Literals` are numerical byte values containing the numbers 0 - 9, or characters wrapped in `'`. 
+`Literals` are numerical byte values containing the numbers 0 - 9, or characters wrapped in `''`. 
 <br>Because of the languages nature they are limited to the range 0 - 255.
 <br>In the event they exceed their limit, the compiler will attempt to wrap them using modulus.
 <br>A value exceeding the 64 bit unsigned integer limit may result in undefined behaviour.
