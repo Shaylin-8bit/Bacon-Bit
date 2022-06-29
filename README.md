@@ -31,3 +31,12 @@ or
 ```
 baconbit.exe file
 ```
+
+<h2> Documentation </h2>
+
+To learn how to use the language, check <a href="./DOCUMENTATION.md"> DOCUMENTATION.md </a>
+
+<h2> Contributing </h2>
+
+Interested in contributing? Check <a href="./CONTRIBUTING.md"> CONTRIBUTING.md </a>
+ 
