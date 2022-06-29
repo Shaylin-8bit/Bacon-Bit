@@ -1,0 +1,5 @@
+#define ENDLINE '\n'
+#define WORD_SEPARATOR '\n'
+#define SINGLE_LINE_COMMENT ';'
+#define MULTI_LINE_COMMENT '"'
+#define STRING '\''

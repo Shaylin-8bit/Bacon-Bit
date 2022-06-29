@@ -3,6 +3,7 @@
 #include <string.h>
 #include "include/map.h"
 #include "include/mainlib.h"
+#include "include/flags.h"
 
 unsigned long long raise(unsigned long long base, unsigned long long exp) {
     if (exp == 0) return 1;
@@ -99,7 +100,7 @@ ByteStream compiler(char** lint) {
                 push(&result, nbyte);
                 push(&result, get_flag_byte("__literal"));
             
-            } else if (strlen(next) >= 3 && next[0] == '\'' && next[strlen(next)-1] == '\'') {
+            } else if (strlen(next) >= 3 && next[0] == STRING && next[strlen(next)-1] == STRING) {
                 push(&result, get_flag_byte("__literal"));
                 push(&result, tochar(next));
                 push(&result, get_flag_byte("__literal"));

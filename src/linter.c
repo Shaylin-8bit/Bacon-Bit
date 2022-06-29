@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "include/mainlib.h"
+#include "include/flags.h"
 
 ByteStream linter(ByteStream file) {
     ByteStream buffer = stream("LINTER");
@@ -15,38 +16,37 @@ ByteStream linter(ByteStream file) {
         if (isspace(c)) {
             if (!white) {
                 white = 1;
-                push(&buffer, '\n');
+                push(&buffer, WORD_SEPARATOR);
             }
-        } else if (c == ';') {
-            while (c != '\n' && c != EOF) {
+        } else if (c == SINGLE_LINE_COMMENT) {
+            while (c != ENDLINE && c != EOF) {
                 c = file.bytes[++i];
             }
             if (!white) {
                 white = 1;
-                push(&buffer, '\n');
+                push(&buffer, WORD_SEPARATOR);
             }
-        } else if (c == '"') {
+        } else if (c == MULTI_LINE_COMMENT) {
             do {
                 c = file.bytes[++i];
-            } while (c != '"' && c != EOF);
+            } while (c != MULTI_LINE_COMMENT && c != EOF);
             if (!white) {
                 white = 1;
-                push(&buffer, '\n');
+                push(&buffer, WORD_SEPARATOR);
             }
-        } else if (c == '\'') {
+        } else if (c == STRING) {
             do {
                 push(&buffer, c);
                 c = file.bytes[++i];
-            } while (c != '\'' && c != EOF);
+            } while (c != STRING && c != EOF);
             white = 1;
-            push(&buffer, '\'');
-            push(&buffer, '\n');
+            push(&buffer, STRING);
+            push(&buffer, WORD_SEPARATOR);
         } else {
             white = 0;
             push(&buffer, c);
         }
     }
 
-    push(&buffer, '\0');
     return buffer;
 }
