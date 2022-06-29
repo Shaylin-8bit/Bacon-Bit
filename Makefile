@@ -1,3 +1,9 @@
+COM = gcc       # Set to your compilers command
+OUT = baconbit  # Set to output name of executable
+
+SRC = src/
+HED = $(SRC)include/
+
 UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 COMMAND = rm
@@ -5,12 +11,8 @@ else
 COMMAND = del
 endif
 
-COM = gcc
-SRC = src/
-HED = $(SRC)include/
-
 main: main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o $(HED)mainlib.h $(HED)map.h
-	$(COM) -o baconbit.exe main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o
+	$(COM) -o $(OUT) main.o file_handler.o linter.o tokenizer.o compiler.o interpreter.o util.o
 	make clean
 
 main.o: $(SRC)main.c $(HED)mainlib.h
