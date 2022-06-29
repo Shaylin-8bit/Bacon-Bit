@@ -15,7 +15,7 @@ unsigned long long raise(unsigned long long base, unsigned long long exp) {
 unsigned char toint(char* str) {
     unsigned long long int result = 0;
     unsigned long long int mult = raise(10, strlen(str)-1);
-    for (size_t i = 0; i < strlen(str); i++) {
+    for (bytes_8 i = 0; i < strlen(str); i++) {
         if (str[i] < '0' || str[i] > '9') {
             fputs("COMPILER ERROR: literal value not a number", stderr);
             exit(EXIT_FAILURE);
@@ -30,7 +30,7 @@ unsigned char toint(char* str) {
 }
 
 unsigned char tochar(char* str) {
-    size_t len = strlen(str);
+    bytes_8 len = strlen(str);
     if ((len < 3 || len > 4) || (len > 3 && str[1] != '\\')) {
         fputs("COMPILER ERROR: literal value not a valid char", stderr);
         exit(EXIT_FAILURE);
@@ -53,7 +53,7 @@ unsigned char tochar(char* str) {
 }
 
 unsigned char get_command_byte(char* str) {
-    for (size_t i = 0; COMMANDS[i].word != NULL; i++) {
+    for (bytes_8 i = 0; COMMANDS[i].word != NULL; i++) {
         if (!strcmp(str, COMMANDS[i].word)) return COMMANDS[i].byte;
     }
     return 0;
@@ -61,7 +61,7 @@ unsigned char get_command_byte(char* str) {
 
 
 unsigned char get_global_byte(char* str) {
-    for (size_t i = 0; GLOBALS[i].word != NULL; i++) {
+    for (bytes_8 i = 0; GLOBALS[i].word != NULL; i++) {
         if (!strcmp(str, GLOBALS[i].word)) return GLOBALS[i].byte;
     }
     return 0;
@@ -69,7 +69,7 @@ unsigned char get_global_byte(char* str) {
 
 
 unsigned char get_flag_byte(char* str) {
-    for (size_t i = 0; FLAGS[i].word != NULL; i++) {
+    for (bytes_8 i = 0; FLAGS[i].word != NULL; i++) {
         if (!strcmp(str, FLAGS[i].word)) return FLAGS[i].byte;
     }
     return 0;
@@ -80,7 +80,7 @@ ByteStream compiler(char** lint) {
     ByteStream result = stream("COMPILER");
     long long loops = 0;
     
-    for (size_t i = 0; lint[i]; i++) {
+    for (bytes_8 i = 0; lint[i]; i++) {
         char* token = lint[i];
         unsigned char byte = get_command_byte(token);
 

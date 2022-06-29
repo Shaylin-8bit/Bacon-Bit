@@ -1,14 +1,16 @@
+typedef unsigned long long int bytes_8;
+
 typedef struct {
     unsigned char* bytes;
-    size_t sze;
+    bytes_8 sze;
 } ByteStream;
 
 typedef struct {
     unsigned char field[256];
     unsigned char location;
-    size_t loops;
+    bytes_8 loops;
     ByteStream program;
-    size_t line;
+    bytes_8 line;
 } Instance;
 
 ByteStream file_handler(char* fn);

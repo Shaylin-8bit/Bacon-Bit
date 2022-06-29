@@ -8,10 +8,10 @@
 ByteStream linter(ByteStream file) {
     ByteStream buffer = stream("LINTER");
 
-    size_t i = 0;
+    bytes_8 i = 0;
     char white = 0;
 
-    for (size_t i = 0; i < file.sze; i++) {
+    for (bytes_8 i = 0; i < file.sze; i++) {
         char c = file.bytes[i];
         if (isspace(c)) {
             if (!white) {
